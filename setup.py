@@ -64,6 +64,7 @@ tests_require = [
     'python-coveralls',
     'responses',
     'riak',
+    'setuptools>=17.1',
 ]
 
 
