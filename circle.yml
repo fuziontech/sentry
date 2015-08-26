@@ -1,0 +1,32 @@
+machine:
+  python:
+    version: 2.7
+  services:
+    - elasticsearch
+    - memcached
+    - riak
+    - mysql
+    - postgresql
+    - redis
+    - cassandra
+  environment:
+    DB: mysql
+    PIP_DOWNLOAD_CACHE: ".pip_download_cache"
+dependencies:
+  cache_directories:
+      - node_modules
+      - .pip_download_cache
+      - "$HOME/virtualenv/python2.7.9"
+  pre:
+    - time make develop dev-postgres dev-mysql
+test:
+  pre:
+    - mysql -e 'create database sentry;'
+    - psql -c 'create database sentry;' -U postgres
+    - "echo \"create keyspace sentry with replication = {'class' : 'SimpleStrategy', 'replication_factor': 1};\" | cqlsh --cqlversion=3.0.3"
+    - echo 'create table nodestore (key text primary key, value blob, flags int);' | cqlsh -k sentry --cqlversion=3.0.3
+  override:
+    - make lint
+    - make test-js
+    - py.test tests
+    - make test-cli
