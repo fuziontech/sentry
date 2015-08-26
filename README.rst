@@ -1,6 +1,5 @@
 Sentry
 ======
-[![Build Status](https://travis-ci.org/fuziontech/sentry.svg)](https://travis-ci.org/fuziontech/sentry)
 
 Sentry is a modern error logging and aggregation platform.
 
