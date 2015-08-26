@@ -17,7 +17,7 @@ dependencies:
       - node_modules
       - .pip_download_cache
       - "$HOME/virtualenv/python2.7.9"
-  pre:
+  override:
     - time make develop dev-postgres dev-mysql
 test:
   pre:
