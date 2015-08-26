@@ -79,6 +79,7 @@ test-cli:
 test-js:
 	@echo "--> Running JavaScript tests"
 	@npm install
+	@npm install webpack -g
 	@webpack
 	@npm run test
 	@echo ""
