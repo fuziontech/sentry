@@ -17,7 +17,7 @@ dependencies:
     - .pip_download_cache
     - "$HOME/virtualenv/python2.7.9"
   override:
-    - time make develop dev-postgres dev-mysql
+    - make dev-postgres
 test:
   pre:
     - mysql -e 'create database sentry;'
@@ -25,7 +25,4 @@ test:
     - "echo \"create keyspace sentry with replication = {'class' : 'SimpleStrategy', 'replication_factor': 1};\" | cqlsh --cqlversion=3.0.3"
     - echo 'create table nodestore (key text primary key, value blob, flags int);' | cqlsh -k sentry --cqlversion=3.0.3
   override:
-    - make lint
-    - make test-js
-    - py.test tests
-    - make test-cli
+    - make test
