@@ -1,22 +1,21 @@
 machine:
   python:
-    version: 2.7
+    version: 2.7.9
   services:
     - elasticsearch
     - memcached
     - riak
-    - mysql
     - postgresql
     - redis
     - cassandra
   environment:
-    DB: mysql
+    DB: postgres
     PIP_DOWNLOAD_CACHE: ".pip_download_cache"
 dependencies:
   cache_directories:
-      - node_modules
-      - .pip_download_cache
-      - "$HOME/virtualenv/python2.7.9"
+    - node_modules
+    - .pip_download_cache
+    - "$HOME/virtualenv/python2.7.9"
   override:
     - time make develop dev-postgres dev-mysql
 test:
